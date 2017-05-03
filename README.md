@@ -4,13 +4,12 @@ Ramon Mata
 
 This notebook contains the exploratory analysis and modeling for the *Titanic Getting Started Prediction Competition*, it also tries to document **R** commands executed
 
-*Update Date: Wed May 3 12:40:08 2017*
-*R version: 3.4.0*
+*Update Date: Wed May 3 13:20:54 2017* <br> *R version: 3.4.0*
 
 Packages and Data Files
 -----------------------
 
-The following commands add the specified variables to the R enviroment so we can use their functionality
+The following commands add the specified variables to the R environment so we can use their functionality
 
 ``` r
 # Data Visualisation and themes
@@ -86,8 +85,8 @@ We have an extra variable *Survived* in the Training file
 Exploratory Analysis
 --------------------
 
-Data Processing and Exloratory Analysis
----------------------------------------
+Data Processing and Exploratory Analysis
+----------------------------------------
 
 Modeling with Random Forest
 ---------------------------

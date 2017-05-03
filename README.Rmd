@@ -10,11 +10,11 @@ params:
 
 This notebook contains the exploratory analysis and modeling for the *Titanic Getting Started Prediction Competition*, it also tries to document **R** commands executed
 
-*Update Date: `r params$date`*  
+*Update Date: `r params$date`*  <br>
 *R version: `r params$rversion`*  
 
 ## Packages and Data Files
-The following commands add the specified variables to the R enviroment so we can use their functionality
+The following commands add the specified variables to the R environment so we can use their functionality
 ```{r}
 # Data Visualisation and themes
 library('ggplot2')
@@ -56,7 +56,7 @@ We have an extra variable *Survived* in the Training file
 
 ## Exploratory Analysis
 
-## Data Processing and Exloratory Analysis
+## Data Processing and Exploratory Analysis
 
 ## Modeling with Random Forest
 
