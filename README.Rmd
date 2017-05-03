@@ -1,0 +1,66 @@
+---
+title: "Titanic Data"
+author: "Ramon Mata"
+output:
+  github_document
+params:
+  date: !r date()
+  rversion: !r getRversion()
+---
+
+This notebook contains the exploratory analysis and modeling for the *Titanic Getting Started Prediction Competition*, it also tries to document **R** commands executed
+
+*Update Date: `r params$date`*  
+*R version: `r params$rversion`*  
+
+## Packages and Data Files
+The following commands add the specified variables to the R enviroment so we can use their functionality
+```{r}
+# Data Visualisation and themes
+library('ggplot2')
+library('ggthemes')
+
+# Scale functions for Visualisations
+library('scales')
+
+# Data Manipulation
+suppressMessages(library('dplyr'))
+
+# Classification and Regression with Random Forest
+suppressMessages(library('randomForest'))
+
+```
+The supressMessage function will *"suppress"* the extra information printed by the later 2 packages.
+
+Write `?supressMessages` in the R console to get help
+
+## Loading Data
+```{r}
+# Load train and test files provided by Kaggle and
+# not reading string as Factors
+train <- read.csv('data/train.csv', stringsAsFactors = FALSE)
+test <- read.csv('data/test.csv', stringsAsFactors = FALSE)
+```
+
+- See [Factors](https://stat.ethz.ch/R-manual/R-devel/library/base/html/factor.html)
+- `?factor` in the R console for help
+
+After Data is loaded in R Global Environment, we can take a look at the data by executing:
+```{r}
+str(train)
+str(test)
+```
+
+We have an extra variable *Survived* in the Training file
+
+
+## Exploratory Analysis
+
+## Data Processing and Exloratory Analysis
+
+## Modeling with Random Forest
+
+## Cross - Validation ?
+
+## Prediction
+
