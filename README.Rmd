@@ -45,16 +45,48 @@ test <- read.csv('data/test.csv', stringsAsFactors = FALSE)
 - See [Factors](https://stat.ethz.ch/R-manual/R-devel/library/base/html/factor.html)
 - `?factor` in the R console for help
 
-After Data is loaded in R Global Environment, we can take a look at the data by executing:
+After Data is loaded in R Global Environment, we can take a quick look at the data by executing the following:
 ```{r}
 str(train)
 str(test)
 ```
 
-We have an extra variable *Survived* in the Training file
+Thigs we notice after the execution of `str()` for both data files
 
+- We have an extra variable `Survived` in train file
+- Age contains `NA`
+- Cabin may come as empty string
+?@|@
 
 ## Exploratory Analysis
+
+### Age vs Survived
+```{r}
+ggplot(train, aes(Age, fill = factor(Survived))) +
+  geom_histogram(bins=30) +
+  theme_minimal() +
+  xlab("Age") +
+  scale_fill_discrete(name = "Survived")
+```
+### Sex vs Survived
+```{r}
+ggplot(train, aes(Sex, fill = factor(Survived))) +
+  geom_histogram(stat = "count") +
+  theme_minimal() +
+  xlab("Sex") +
+  scale_fill_discrete(name = "Survived")
+```
+
+### Age vs Sex vs Survived
+```{r}
+ggplot(train, aes(Age, fill = factor(Survived))) +
+  geom_histogram(bins=30) +
+  theme_minimal() +
+  xlab("Age") +
+  ylab("Count") +
+  facet_grid(.~Sex)+
+  scale_fill_discrete(name = "Survived")
+```
 
 ## Data Processing and Exploratory Analysis
 

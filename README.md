@@ -4,7 +4,7 @@ Ramon Mata
 
 This notebook contains the exploratory analysis and modeling for the *Titanic Getting Started Prediction Competition*, it also tries to document **R** commands executed
 
-*Update Date: Wed May 3 13:20:54 2017* <br> *R version: 3.4.0*
+*Update Date: Wed May 3 14:16:32 2017* <br> *R version: 3.4.0*
 
 Packages and Data Files
 -----------------------
@@ -43,7 +43,7 @@ test <- read.csv('data/test.csv', stringsAsFactors = FALSE)
 -   See [Factors](https://stat.ethz.ch/R-manual/R-devel/library/base/html/factor.html)
 -   `?factor` in the R console for help
 
-After Data is loaded in R Global Environment, we can take a look at the data by executing:
+After Data is loaded in R Global Environment, we can take a quick look at the data by executing the following:
 
 ``` r
 str(train)
@@ -80,10 +80,56 @@ str(test)
     ##  $ Cabin      : chr  "" "" "" "" ...
     ##  $ Embarked   : chr  "Q" "S" "Q" "S" ...
 
-We have an extra variable *Survived* in the Training file
+Thigs we notice after the execution of `str()` for both data files
+
+-   We have an extra variable `Survived` in train file
+-   Age contains `NA`
+-   Cabin may come as empty string <?@%7C>@
 
 Exploratory Analysis
 --------------------
+
+### Age vs Survived
+
+``` r
+ggplot(train, aes(Age, fill = factor(Survived))) +
+  geom_histogram(bins=30) +
+  theme_minimal() +
+  xlab("Age") +
+  scale_fill_discrete(name = "Survived")
+```
+
+    ## Warning: Removed 177 rows containing non-finite values (stat_bin).
+
+![](README_files/figure-markdown_github/unnamed-chunk-4-1.png) \#\#\# Sex vs Survived
+
+``` r
+ggplot(train, aes(Sex, fill = factor(Survived))) +
+  geom_histogram(stat = "count") +
+  theme_minimal() +
+  xlab("Sex") +
+  scale_fill_discrete(name = "Survived")
+```
+
+    ## Warning: Ignoring unknown parameters: binwidth, bins, pad
+
+![](README_files/figure-markdown_github/unnamed-chunk-5-1.png)
+
+### Age vs Sex vs Survived
+
+``` r
+ggplot(train, aes(Age, fill = factor(Survived))) +
+  geom_histogram(bins=30) +
+  theme_minimal() +
+  xlab("Age") +
+  ylab("Count") +
+  facet_grid(.~Sex)+
+  scale_fill_discrete(name = "Survived")
+```
+
+    ## Warning: Removed 177 rows containing non-finite values (stat_bin).
+
+![](README_files/figure-markdown_github/unnamed-chunk-6-1.png)
 
 Data Processing and Exploratory Analysis
 ----------------------------------------
