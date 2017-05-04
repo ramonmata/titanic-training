@@ -1,19 +1,29 @@
 ---
 title: "Titanic Data"
 author: "Ramon Mata"
-output:
-  github_document
 params:
   date: !r date()
+  rsversion: !r RStudio.Version()$version
   rversion: !r getRversion()
+output:
+  github_document: default
+  html_notebook: default
 ---
 
-This notebook contains the exploratory analysis and modeling for the *Titanic Getting Started Prediction Competition*, it also tries to document **R** commands executed
+This notebook contains the exploratory analysis and modeling for the *Titanic Getting Started Prediction Competition*, it also tries to document some of hte *R* commands executed
 
-*Update Date: `r params$date`*  <br>
-*R version: `r params$rversion`*  
+<small>
+**Last update**: `r params$date` <br>
+**R Version**: `r params$rversion` <br>
+**RStudio Version**: `r params$rversion`
+</small>
 
-## Packages and Data Files
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE, message=FALSE, warning = FALSE, comment = FALSE)
+```
+
+## Load Packages and Data Files
 The following commands add the specified variables to the R environment so we can use their functionality
 ```{r}
 # Data Visualisation and themes
@@ -32,7 +42,7 @@ suppressMessages(library('randomForest'))
 ```
 The supressMessage function will *"suppress"* the extra information printed by the later 2 packages.
 
-Write `?supressMessages` in the R console to get help
+Write `?supressMessages` in the *R* console to get more information
 
 ## Loading Data
 ```{r}
@@ -43,50 +53,78 @@ test <- read.csv('data/test.csv', stringsAsFactors = FALSE)
 ```
 
 - See [Factors](https://stat.ethz.ch/R-manual/R-devel/library/base/html/factor.html)
-- `?factor` in the R console for help
+- or type `?factor` within *R* console for help
 
-After Data is loaded in R Global Environment, we can take a quick look at the data by executing the following:
+After Data is loaded in *R* Global Environment, we can take a quick look at the data by executing the following:
 ```{r}
 str(train)
 str(test)
 ```
 
-Thigs we notice after the execution of `str()` for both data files
+After execution of `str()` for both data files, we can see some information about the files like:
 
-- We have an extra variable `Survived` in train file
-- Age contains `NA`
-- Cabin may come as empty string
-?@|@
+- Train file has more observations
+- An extra variable `Survived` exists in train file
+- Age may contain: `NA`
+- Cabin may come as empty string: ""
 
-## Exploratory Analysis
+## Exploratory Analysis - <small>*As is*</small>
 
-### Age vs Survived
-```{r}
-ggplot(train, aes(Age, fill = factor(Survived))) +
-  geom_histogram(bins=30) +
+### Age <small>vs</small> Survived
+```{r  message=F, warning=F}
+ggplot(train, aes(Age, fill = factor(Survived, labels = c("No","Yes")))) +
+  geom_histogram(bins = 30) +
   theme_minimal() +
   xlab("Age") +
-  scale_fill_discrete(name = "Survived")
-```
-### Sex vs Survived
-```{r}
-ggplot(train, aes(Sex, fill = factor(Survived))) +
-  geom_histogram(stat = "count") +
-  theme_minimal() +
-  xlab("Sex") +
+  ylab("Count") +
   scale_fill_discrete(name = "Survived")
 ```
 
-### Age vs Sex vs Survived
+### Sex <small>vs</small> Survived
 ```{r}
-ggplot(train, aes(Age, fill = factor(Survived))) +
-  geom_histogram(bins=30) +
+ggplot(train, aes(Sex, fill = factor(Survived, labels = c("No","Yes")))) +
+  geom_bar(stat = "count") +
+  theme_minimal() +
+  xlab("Sex") +
+  ylab("Count") +
+  scale_fill_discrete(name = "Survived")
+```
+
+### Age <small>vs</small> Sex <small>vs</small> Survived
+```{r message=F, warning=F}
+
+ggplot(train, aes(Age, fill = factor(Survived, labels = c("No","Yes")))) +
+  geom_histogram(bins = 30) +
   theme_minimal() +
   xlab("Age") +
   ylab("Count") +
   facet_grid(.~Sex)+
   scale_fill_discrete(name = "Survived")
 ```
+
+### Class <small>vs</small> Sex <small>vs</small> Survived
+```{r}
+#scale_fill_brewer(palette="Greys", name = "Survived")
+ggplot(train, aes(Pclass, fill = factor(Survived, labels = c("No","Yes")))) +
+  geom_bar(stat = "count") +
+  theme_minimal() +
+  facet_grid(~Sex)+
+  xlab("Passenger Class") +
+  ylab("Count") +
+  scale_fill_discrete(name = "Survived")
+```
+
+### Class <small>vs</small> Sex <small>vs</small> Age <small>vs</small> Survived
+```{r}
+ggplot(train, aes(x = Age, y = Sex)) +
+  geom_jitter(aes(colour = factor(Survived, labels = c("No","Yes")))) +
+  theme_minimal() +
+  facet_wrap(~Pclass) +
+  labs(x = "Age", y = "Sex", colour = "Survived") +
+  scale_x_continuous(name="Age",limits=c(0, 81))
+
+```
+
 
 ## Data Processing and Exploratory Analysis
 
