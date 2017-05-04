@@ -4,7 +4,7 @@ Ramon Mata
 
 This notebook contains the exploratory analysis and modeling for the *Titanic Getting Started Prediction Competition*, it also tries to document some of hte *R* commands executed
 
-<small> **Last update**: Wed May 3 18:59:28 2017 <br> **R Version**: 3.4.0 <br> **RStudio Version**: 3.4.0 </small>
+<small> **R Version**: 3.4.0 <br> **RStudio Version**: 1.0.143 <br> **Last update**: Wed May 3 19:12:32 2017 </small>
 
 Load Packages and Data Files
 ----------------------------

@@ -2,9 +2,9 @@
 title: "Titanic Data"
 author: "Ramon Mata"
 params:
-  date: !r date()
-  rsversion: !r RStudio.Version()$version
-  rversion: !r getRversion()
+  date: !r date()  
+  rversion: !r getRversion()  
+  rsversion: "1.0.143"  
 output:
   github_document: default
   html_notebook: default
@@ -13,9 +13,9 @@ output:
 This notebook contains the exploratory analysis and modeling for the *Titanic Getting Started Prediction Competition*, it also tries to document some of hte *R* commands executed
 
 <small>
-**Last update**: `r params$date` <br>
 **R Version**: `r params$rversion` <br>
-**RStudio Version**: `r params$rversion`
+**RStudio Version**: `r params$rsversion` <br>
+**Last update**: `r params$date`
 </small>
 
 
